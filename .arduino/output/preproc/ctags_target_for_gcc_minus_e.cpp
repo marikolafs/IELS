@@ -13,12 +13,13 @@ void setup() {
 
 void loop() {
   pixels.clear();
+
   for(int i=0; i<32; i++) {
 
     pixels.setPixelColor(i, pixels.Color(100, 255, 50));
 
     pixels.show();
 
-    delay(300);
+    delay(30);
   }
 }
