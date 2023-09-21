@@ -10,32 +10,127 @@
     "Includepath": "C:\\Users\\Maria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\variants\\standard"
   },
   {
-    "Sourcefile": "C:\\Users\\Maria\\Downloads\\IELS\\.arduino\\output\\sketch\\led list 2.ino.cpp",
-    "Include": "Adafruit_NeoPixel.h",
-    "Includepath": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel"
+    "Sourcefile": "C:\\Users\\Maria\\Downloads\\IELS\\.arduino\\output\\sketch\\1dPong.ino.cpp",
+    "Include": "Adafruit_Circuit_Playground.h",
+    "Includepath": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground"
   },
   {
-    "Sourcefile": "C:\\Users\\Maria\\Downloads\\IELS\\.arduino\\output\\sketch\\led list 2.ino.cpp",
+    "Sourcefile": "C:\\Users\\Maria\\Downloads\\IELS\\.arduino\\output\\sketch\\1dPong.ino.cpp",
+    "Include": "SPI.h",
+    "Includepath": "C:\\Users\\Maria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\SPI\\src"
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Downloads\\IELS\\.arduino\\output\\sketch\\1dPong.ino.cpp",
+    "Include": "Wire.h",
+    "Includepath": "C:\\Users\\Maria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\Wire\\src"
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Downloads\\IELS\\.arduino\\output\\sketch\\1dPong.ino.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel\\Adafruit_NeoPixel.cpp",
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\Adafruit_CircuitPlayground.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel\\esp.c",
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\Adafruit_CPlay_FreeTouch.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel\\esp8266.c",
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\Adafruit_CPlay_LIS3DH.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel\\kendyte_k210.c",
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\Adafruit_CPlay_Mic.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\Adafruit_CPlay_NeoPixel.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\Adafruit_CPlay_Speaker.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\Adafruit_ZeroPDM.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\CP_Firmata.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\CPlay_CapacitiveSensor.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\IRLibDecodeBase.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\IRLibHardware.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\IRLibProtocols.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\IRLibRecvBase.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\IRLibRecvPCI.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\IRLibSAMD21.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\IRLibSendBase.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\ffft.S",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\Documents\\Arduino\\libraries\\Adafruit_Circuit_Playground\\utility\\talkie.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\SPI\\src\\SPI.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\Wire\\src\\Wire.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\Maria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\Wire\\src\\utility\\twi.c",
     "Include": "",
     "Includepath": null
   }

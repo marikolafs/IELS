@@ -1,31 +1,30 @@
-# 1 "C:\\Users\\Maria\\Downloads\\IELS\\github\\led list 2\\1dPong\\1dPong.ino"
-# 2 "C:\\Users\\Maria\\Downloads\\IELS\\github\\led list 2\\1dPong\\1dPong.ino" 2
-# 3 "C:\\Users\\Maria\\Downloads\\IELS\\github\\led list 2\\1dPong\\1dPong.ino" 2
+#include <Adafruit_Circuit_Playground.h>
+#include <Adafruit_CircuitPlayground.h>
 
-
+#define CLICKTHRESHOLD = 8
 
 unsigned long previousMillis = 0;
 const long interval[] = {25, 15, 10, 6};
 int neoPixelNumber = 0;
 int gameLevel = 0;
 
-boolean ledState = 0x0;
-boolean tapDetectResetTimer = 0x0;
-boolean directionState = 0x0;
-boolean justStartet = 0x1;
-boolean gameOver = 0x1;
+boolean ledState = LOW;
+boolean tapDetectResetTimer = LOW;
+boolean directionState = LOW;
+boolean justStartet = HIGH;
+boolean gameOver = HIGH;
 int missesPlayerRight = 0;
 int missesPlayerLeft = 0;
 int hitsInARow = 0;
 int maxHitsInARowPerGameLevel = 8;
 bool leftButtonPressed;
 bool rightButtonPressed;
-bool lockoutLeftButton = 0x0;
-bool lockoutRightButton = 0x0;
+bool lockoutLeftButton = LOW;
+bool lockoutRightButton = LOW;
 
 const int brightness = 10;
 int ledPin;
-int detectedTap = 0x0;
+int detectedTap = LOW;
 unsigned long previousMillisTapDetector = 0;
 const long tapDetectResetDuration = 100;
 
@@ -36,11 +35,11 @@ void updateTapDetector(){
         if(currentMillisTapDetector - previousMillisTapDetector >= tapDetectResetDuration){
             previousMillisTapDetector = currentMillisTapDetector;
 
-            if(tapDetectResetTimer == 0x0){
-                tapDetectResetTimer = 0x1;
+            if(tapDetectResetTimer == LOW){
+                tapDetectResetTimer = HIGH;
             } else {
-                tapDetectResetTimer = 0x0;
-                detectedTap = 0x0;
+                tapDetectResetTimer = LOW;
+                detectedTap = LOW;
             }
         }
         digitalWrite(6, detectedTap);
@@ -48,20 +47,20 @@ void updateTapDetector(){
 }
 
 void TapDetector(){
-    detectedTap = 0x1;
+    detectedTap = HIGH;
 }
 
 void setup(){
   CircuitPlayground.begin();
   CircuitPlayground.setBrightness(brightness);
   CircuitPlayground.clearPixels();
-  CircuitPlayground.setAccelRange(LIS3DH_RANGE_2_G); // 2, 4, 8 or 16 G!
+  CircuitPlayground.setAccelRange(LIS3DH_RANGE_2_G);   // 2, 4, 8 or 16 G!
   CircuitPlayground.setAccelTap(1, 8);
 
-  attachInterrupt(((7) == 2 ? 0 : ((7) == 3 ? 1 : -1)), TapDetector, 2);
+  attachInterrupt(digitalPinToInterrupt(7), TapDetector, FALLING);
 
   ledPin = 6;
-  pinMode(ledPin, 0x1);
+  pinMode(ledPin, OUTPUT);
 
   digitalWrite(6, detectedTap);
 }
@@ -72,8 +71,8 @@ void showIntro(){
     if(currentMillis - previousMillis >= interval[0]){
         previousMillis = currentMillis;
 
-        if(ledState == 0x0){
-            ledState = 0x1;
+        if(ledState == LOW){
+            ledState = HIGH;
 
             if(neoPixelNumber == 9 || neoPixelNumber == 0){
                 CircuitPlayground.clearPixels();
@@ -82,24 +81,24 @@ void showIntro(){
                 CircuitPlayground.setPixelColor(neoPixelNumber, 0, 0, 255);
             }
 
-            if(directionState == 0x0){
+            if(directionState == LOW){
 
                 if(neoPixelNumber < 9){
                     neoPixelNumber = neoPixelNumber + 1;
                 } else {
                     neoPixelNumber = neoPixelNumber - 1;
-                    directionState = 0x1;
+                    directionState = HIGH;
                 }
             } else {
                 if(neoPixelNumber > 0){
                     neoPixelNumber = neoPixelNumber - 1;
                 } else {
                     neoPixelNumber = neoPixelNumber + 1;
-                    directionState = 0x0;
+                    directionState = LOW;
                 }
             }
         } else {
-            ledState = 0x0;
+            ledState = LOW;
         }
     }
 
@@ -110,12 +109,12 @@ void updateGameState(){
 
     if((CircuitPlayground.leftButton() && gameOver) || (CircuitPlayground.rightButton() && gameOver)){
         CircuitPlayground.clearPixels();
-        gameOver = 0x0;
+        gameOver = LOW;
         missesPlayerLeft = 0;
         missesPlayerRight = 0;
         gameLevel = 0;
         neoPixelNumber = 1;
-        directionState = 0x0;
+        directionState = LOW;
     }
 
     if(!gameOver) playGame();
@@ -127,20 +126,20 @@ void playGame(void){
     if(currentMillis - previousMillis >= interval[gameLevel]){
         previousMillis = currentMillis;
 
-        if(!CircuitPlayground.rightButton()) lockoutRightButton = 0x0;
-        if(!CircuitPlayground.leftButton()) lockoutLeftButton = 0x0;
+        if(!CircuitPlayground.rightButton()) lockoutRightButton = LOW;
+        if(!CircuitPlayground.leftButton()) lockoutLeftButton = LOW;
 
-        if(CircuitPlayground.rightButton() && neoPixelNumber < 9) lockoutRightButton = 0x1;
-        if(CircuitPlayground.leftButton() && neoPixelNumber > 0) lockoutLeftButton = 0x1;
+        if(CircuitPlayground.rightButton() && neoPixelNumber < 9) lockoutRightButton = HIGH;
+        if(CircuitPlayground.leftButton() && neoPixelNumber > 0) lockoutLeftButton = HIGH;
 
-        if(ledState == 0x0){
-            ledState = 0x1;
+        if(ledState == LOW){
+            ledState = HIGH;
 
             if(neoPixelNumber == 9){
                 CircuitPlayground.clearPixels();
 
                 if((CircuitPlayground.rightButton() && !lockoutRightButton) || detectedTap){
-                    lockoutRightButton = 0x1;
+                    lockoutRightButton = HIGH;
                     CircuitPlayground.setPixelColor(neoPixelNumber, 0, 255, 0);
                     hitsInARow = hitsInARow + 1;
 
@@ -164,7 +163,7 @@ void playGame(void){
                 CircuitPlayground.clearPixels();
 
                 if((CircuitPlayground.leftButton() && !lockoutLeftButton) || detectedTap){
-                    lockoutLeftButton = 0x1;
+                    lockoutLeftButton = HIGH;
                     CircuitPlayground.setPixelColor(neoPixelNumber, 0, 255, 0);
                     hitsInARow = hitsInARow + 1;
 
@@ -191,13 +190,13 @@ void playGame(void){
                 if(gameLevel == 3) CircuitPlayground.setPixelColor(neoPixelNumber, 255, 255, 255);
             }
 
-            if(directionState == 0x0){
-
+            if(directionState == LOW){
+                
                 if(neoPixelNumber < 9){
                     neoPixelNumber = neoPixelNumber + 1;
                 } else {
                     neoPixelNumber = neoPixelNumber - 1;
-                    directionState = 0x1;
+                    directionState = HIGH;
                 }
             } else {
 
@@ -205,11 +204,11 @@ void playGame(void){
                     neoPixelNumber = neoPixelNumber - 1;
                 } else {
                     neoPixelNumber = neoPixelNumber + 1;
-                    directionState = 0x0;
+                    directionState = LOW;
                 }
             }
         } else {
-            ledState = 0x0;
+            ledState = LOW;
         }
     }
 }
@@ -223,7 +222,7 @@ void updateScore(void){
         CircuitPlayground.clearPixels();
         delay(50);
     }
-
+   
    for(int i = 0; i < missesPlayerLeft; i++)
    CircuitPlayground.setPixelColor(i, 255, 0, 0);
     if(missesPlayerLeft == 5){
@@ -245,7 +244,7 @@ void gameOverPlayerRight(void){
     for(int i = 0; i < missesPlayerLeft; i++)
     CircuitPlayground.setPixelColor(i, 0, 255, 0);
     delay(5000);
-    gameOver = 0x1;
+    gameOver = HIGH;
     CircuitPlayground.clearPixels();
 }
 
@@ -253,7 +252,7 @@ void gameOverPlayerLeft(void){
     for(int i = 0; i < missesPlayerRight; i++)
     CircuitPlayground.setPixelColor(9 - i, 0, 255, 0);
     delay(5000);
-    gameOver = 0x1;
+    gameOver = HIGH;
     CircuitPlayground.clearPixels();
 }
 
