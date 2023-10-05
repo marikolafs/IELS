@@ -1,11 +1,12 @@
-# 1 "C:\\Users\\Maria\\Downloads\\IELS\\servo\\servo.ino"
-# 2 "C:\\Users\\Maria\\Downloads\\IELS\\servo\\servo.ino" 2
+#include <Servo.h>
 
 const int servo1 = 9;
 const int servo2 = 10;
+int potensiometer = A0;
 const int t = 1000;
 
 int pos = 0;
+int val;
 
 Servo servo;
 

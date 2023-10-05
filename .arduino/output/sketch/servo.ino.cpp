@@ -1,5 +1,6 @@
-# 1 "C:\\Users\\Maria\\Downloads\\IELS\\servo\\servo.ino"
-# 2 "C:\\Users\\Maria\\Downloads\\IELS\\servo\\servo.ino" 2
+#include <Arduino.h>
+#line 1 "C:\\Users\\Maria\\Downloads\\IELS\\servo\\servo.ino"
+#include <Servo.h>
 
 const int servo1 = 9;
 const int servo2 = 10;
@@ -9,6 +10,11 @@ int pos = 0;
 
 Servo servo;
 
+#line 11 "C:\\Users\\Maria\\Downloads\\IELS\\servo\\servo.ino"
+void setup();
+#line 18 "C:\\Users\\Maria\\Downloads\\IELS\\servo\\servo.ino"
+void loop();
+#line 11 "C:\\Users\\Maria\\Downloads\\IELS\\servo\\servo.ino"
 void setup(){
 
 //servo.attach(servo1);
