@@ -5,8 +5,17 @@ unsigned long interval3 = 500;
 unsigned long interval2 = 3000;
 unsigned long interval1 = 5000;
 
-const int 
+speedReadings[60] = {};
 
+unsigned long previousMillis = 0;
+int secondsOverPercentage = 0;
+
+int chargingCycles = 0;
+
+
+void setup(){
+
+}
 
 int buttonChargePercent(){
      if(buttonState) {
@@ -59,6 +68,7 @@ switch (priceList) {
         batteryLevel = batterLevel + 1;
         delay(5000);
       }
+      chargingCycles = chargingCycles + 1;
       break;
 
     case upToCharge: 
@@ -69,6 +79,7 @@ switch (priceList) {
         batteryLevel = batteryLevel + 1;
         delay(5000);
      }
+     chargingCycles = chargingCycles + 1;
      break;
 
      case chargeUntilStop:
@@ -78,6 +89,7 @@ switch (priceList) {
         delay(5000);
      }
      price = batteryLevel - previousBatteryLevel;
+     chargingCycles = chargingCycles + 1;
      break;
 
      case chargeUntilTime:
@@ -90,6 +102,8 @@ switch (priceList) {
 
         }
      }
+     chargingCycles = chargingCycles + 1;
+     break;
 
      case batteryService:
      while(batteryHealth < 80) {
@@ -103,11 +117,8 @@ switch (priceList) {
      delay(60000);
      batteryHealth = 100;
      price = 300;
+     secondsOverPercentage = 0;
      break;
-}
-
-void setup(){
-
 }
 
 void speedometer() {
@@ -115,23 +126,30 @@ void speedometer() {
     // makshastighet
     // sek kjørt over 70%
 
-    while(speed > 280) {
-        timeOverSpeedPercentage = millis();
-        // ha en effekt på battery health
-    }
+
+    currentMillis = millis();
 
     if(currentMillis - previousMillis > 60000){
         totalSpeed = 0;
-        for(int i = 1, i < arraysize+1, i++){
+        for(int i = 1; i < 61; i++){
             toatalSpeed = totalSpeed + array[i-1]
             if(array[i] > array[i -1]){
                 maxSpeed = array[i];
             }
         }
-        averageSpeed = totalSpeed/arraysize
-    }
+        averageSpeed = totalSpeed/60;
 
-    array[] = {sensorReadings}
+        for(int i = 0; i < 61; i++){
+            if(speed >= 280){
+              secondsOverPercentage = secondsOverPercentage + 1;
+            }
+        }
+    }
+    previousMillis = currentMillis;
+
+    if(secondsOverPercentage % 1 == 0) {
+        batteryHealth = batteryHealth - 1;
+    }
 }
 
 void bank(){
@@ -140,7 +158,37 @@ void bank(){
 
 }
 
+void standardDisplay(){
+
+    display.clear();
+    currentMillis = millis();
+    if(currentMillis - previousMillis >= 10000){
+        if(currentMillis - previousMillis <= 1000){
+            display.print(F("BL:"));
+            display.gotoXY(3, 0);
+            display.print(batteryLevel);
+            display.gotoXY(0, 1);
+            display.print(F("BH:"));
+            display.gotoXY(3, 1);
+            display.print(batteryHealth);
+        } else if (currentMillis - previousMillis <= 2000){
+            display.print(F("CC:"));
+        } else {
+            display.print(F("SP"))
+        }
+  x
+        previousMillis = currentMillis;
+
+        }
+    }
+
+    //batterylevel, batteryhealth, chargingcycles hvert 10. sek i 1 sek
+    //saldo når koblet til ladestasjon
+    //vise fart og distanse
+
+}
+
 
 void loop(){
-// switch for display?
+
 }
