@@ -165,63 +165,104 @@ void standardDisplay(){
     currentMillis = millis();
     if(currentMillis - previousMillis >= 10000){
         if(currentMillis - previousMillis <= 1000){
+            display.clear();
             display.print((reinterpret_cast<const __FlashStringHelper *>(
-# 167 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
+# 168 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
                          (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 167 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
-                         "BL:"
-# 167 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
+# 168 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+                         "BL: % "
+# 168 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
                          ); &__c[0];}))
-# 167 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+# 168 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
                          )));
-            display.gotoXY(3, 0);
+            display.gotoXY(5, 0);
             display.print(batteryLevel);
             display.gotoXY(0, 1);
             display.print((reinterpret_cast<const __FlashStringHelper *>(
-# 171 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
+# 172 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
                          (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 171 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
-                         "BH:"
-# 171 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
+# 172 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+                         "BH: % "
+# 172 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
                          ); &__c[0];}))
-# 171 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+# 172 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
                          )));
-            display.gotoXY(3, 1);
+            display.gotoXY(5, 1);
             display.print(batteryHealth);
         } else if (currentMillis - previousMillis <= 2000){
+            display.clear();
             display.print((reinterpret_cast<const __FlashStringHelper *>(
-# 175 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
+# 177 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
                          (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 175 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
-                         "CC:"
-# 175 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
+# 177 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+                         "CC: "
+# 177 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
                          ); &__c[0];}))
-# 175 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+# 177 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
                          )));
-        } else {
+            display.gotoXY(5, 0);
+            display.print(chargingCycles);
+            display.gotoXY(0, 1);
             display.print((reinterpret_cast<const __FlashStringHelper *>(
-# 177 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
+# 181 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
                          (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 177 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
-                         "SP"
-# 177 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
+# 181 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+                         "BB: kr "
+# 181 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
                          ); &__c[0];}))
-# 177 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
-                         )))
+# 181 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+                         )));
+            display.gotoXY(5, 1);
+            display.print(bankBalance);
+        } else {
+            display.clear();
+            display.print((reinterpret_cast<const __FlashStringHelper *>(
+# 186 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
+                         (__extension__({static const char __c[] __attribute__((__progmem__)) = (
+# 186 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+                         "SP: m/s "
+# 186 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino" 3
+                         ); &__c[0];}))
+# 186 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+                         )));
+            display.gotoXY(5, 0);
+            display.print(averageSpeed);
+            display.gotoXY(0, 1);
+            display.print(F"DI: m ");
+            display.gotoXY(5, 1);
+            display.print(distance);
         }
-  x
         previousMillis = currentMillis;
 
         }
     }
+}
 
-    //batterylevel, batteryhealth, chargingcycles hvert 10. sek i 1 sek
-    //saldo når koblet til ladestasjon
-    //vise fart og distanse
+void display(){
+    switch(displayType){
 
+        case standard:
+        standardDisplay();
+        break;
+
+        case: chargingStation:
+        display.clear();
+        display.print("bank balance:");
+        display.gotoXY(0, 1);
+        display.print(bankBalance);
+        display.gotoXY(5, 1);
+        display.print("$");
+        break;
+
+        case: idk annet?
+
+    }
 }
 
 
 void loop(){
 
 }
+
+
+// teams + powerpoint, ta opp video
