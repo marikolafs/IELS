@@ -164,31 +164,64 @@ void standardDisplay(){
     currentMillis = millis();
     if(currentMillis - previousMillis >= 10000){
         if(currentMillis - previousMillis <= 1000){
-            display.print(F("BL:"));
-            display.gotoXY(3, 0);
+            display.clear();
+            display.print(F("BL: % "));
+            display.gotoXY(5, 0);
             display.print(batteryLevel);
             display.gotoXY(0, 1);
-            display.print(F("BH:"));
-            display.gotoXY(3, 1);
+            display.print(F("BH: % "));
+            display.gotoXY(5, 1);
             display.print(batteryHealth);
         } else if (currentMillis - previousMillis <= 2000){
-            display.print(F("CC:"));
+            display.clear();
+            display.print(F("CC: "));
+            display.gotoXY(5, 0);
+            display.print(chargingCycles);
+            display.gotoXY(0, 1);
+            display.print(F("BB: kr "));
+            display.gotoXY(5, 1);
+            display.print(bankBalance);
         } else {
-            display.print(F("SP"))
+            display.clear();
+            display.print(F("SP: m/s "));
+            display.gotoXY(5, 0);
+            display.print(averageSpeed);
+            display.gotoXY(0, 1);
+            display.print(F"DI: m ");
+            display.gotoXY(5, 1);
+            display.print(distance);
         }
-  x
         previousMillis = currentMillis;
 
         }
     }
+}
 
-    //batterylevel, batteryhealth, chargingcycles hvert 10. sek i 1 sek
-    //saldo når koblet til ladestasjon
-    //vise fart og distanse
+void display(){
+    switch(displayType){
 
+        case standard:
+        standardDisplay();
+        break;
+
+        case: chargingStation:
+        display.clear();
+        display.print("bank balance:");
+        display.gotoXY(0, 1);
+        display.print(bankBalance);
+        display.gotoXY(5, 1);
+        display.print("$");
+        break;
+
+        case: idk annet?
+
+    }
 }
 
 
 void loop(){
 
 }
+
+
+// teams + powerpoint, ta opp video

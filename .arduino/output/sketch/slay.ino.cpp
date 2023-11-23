@@ -10,21 +10,28 @@ unsigned long interval1 = 5000;
 speedReadings[60] = {};
 
 unsigned long previousMillis = 0;
+int secondsOverPercentage = 0;
+
+int chargingCycles = 0;
 
 
-#line 13 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
-int buttonChargePercent();
-#line 33 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
-int buttonChargeTime();
-#line 111 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+#line 16 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
 void setup();
-#line 115 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+#line 20 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+int buttonChargePercent();
+#line 40 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+int buttonChargeTime();
+#line 124 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
 void speedometer();
-#line 145 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+#line 155 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
 void bank();
-#line 152 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
-void loop();
-#line 13 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+#line 161 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+void standardDisplay();
+#line 16 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+void setup(){
+
+}
+
 int buttonChargePercent(){
      if(buttonState) {
          startPress = millis();
@@ -76,6 +83,7 @@ switch (priceList) {
         batteryLevel = batterLevel + 1;
         delay(5000);
       }
+      chargingCycles = chargingCycles + 1;
       break;
 
     case upToCharge: 
@@ -86,6 +94,7 @@ switch (priceList) {
         batteryLevel = batteryLevel + 1;
         delay(5000);
      }
+     chargingCycles = chargingCycles + 1;
      break;
 
      case chargeUntilStop:
@@ -95,6 +104,7 @@ switch (priceList) {
         delay(5000);
      }
      price = batteryLevel - previousBatteryLevel;
+     chargingCycles = chargingCycles + 1;
      break;
 
      case chargeUntilTime:
@@ -107,6 +117,8 @@ switch (priceList) {
 
         }
      }
+     chargingCycles = chargingCycles + 1;
+     break;
 
      case batteryService:
      while(batteryHealth < 80) {
@@ -120,11 +132,8 @@ switch (priceList) {
      delay(60000);
      batteryHealth = 100;
      price = 300;
+     secondsOverPercentage = 0;
      break;
-}
-
-void setup(){
-
 }
 
 void speedometer() {
@@ -137,22 +146,23 @@ void speedometer() {
 
     if(currentMillis - previousMillis > 60000){
         totalSpeed = 0;
-        for(int i = 1, i < 61, i++){
+        for(int i = 1; i < 61; i++){
             toatalSpeed = totalSpeed + array[i-1]
             if(array[i] > array[i -1]){
                 maxSpeed = array[i];
             }
         }
         averageSpeed = totalSpeed/60;
-        while(speed > 280) {
-          timeOverSpeedPercentage = millis();
-          // ha en effekt på battery health
+
+        for(int i = 0; i < 61; i++){
+            if(speed >= 280){
+              secondsOverPercentage = secondsOverPercentage + 1;
+            }
         }
-        
     }
     previousMillis = currentMillis;
 
-    if(timeOverSpeedPercentage % 1000 == 0) {
+    if(secondsOverPercentage % 1 == 0) {
         batteryHealth = batteryHealth - 1;
     }
 }
@@ -163,7 +173,37 @@ void bank(){
 
 }
 
+void standardDisplay(){
+
+    display.clear();
+    currentMillis = millis();
+    if(currentMillis - previousMillis >= 10000){
+        if(currentMillis - previousMillis <= 1000){
+            display.print(F("BL:"));
+            display.gotoXY(3, 0);
+            display.print(batteryLevel);
+            display.gotoXY(0, 1);
+            display.print(F("BH:"));
+            display.gotoXY(3, 1);
+            display.print(batteryHealth);
+        } else if (currentMillis - previousMillis <= 2000){
+            display.print(F("CC:"));
+        } else {
+            display.print(F("SP"))
+        }
+  x
+        previousMillis = currentMillis;
+
+        }
+    }
+
+    //batterylevel, batteryhealth, chargingcycles hvert 10. sek i 1 sek
+    //saldo når koblet til ladestasjon
+    //vise fart og distanse
+
+}
+
 
 void loop(){
-// switch for display?
+
 }
