@@ -1,4 +1,3 @@
-# 1 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
 int bankBalance = 1000;
 priceList [5] = {fullCharge, upToCharge, chargeUntilStop, chargeUntilTime, batteryService, BatteryReplacement};
 
@@ -35,7 +34,7 @@ int buttonChargePercent(){
             charge = 70;
         }
      }
-     return holdTime, buttonCount;
+     return holdTime, buttonCount; 
 }
 
 int buttonChargeTime(){
@@ -58,7 +57,7 @@ int buttonChargeTime(){
             price = 25;
         }
      }
-     return holdTime, buttonCount;
+     return holdTime, buttonCount; 
 }
 
 
@@ -72,7 +71,7 @@ switch (priceList) {
       chargingCycles = chargingCycles + 1;
       break;
 
-    case upToCharge:
+    case upToCharge: 
      buttonChargePercent();
      price = 0;
      while(batteryLevel < charge) {
@@ -85,7 +84,7 @@ switch (priceList) {
 
      case chargeUntilStop:
      previousBatteryLevel = batteryLevel;
-     while(buttonState == 0x1) {
+     while(buttonState == HIGH) {
         batteryLevel = batteryLevel + 1;
         delay(5000);
      }
@@ -113,7 +112,7 @@ switch (priceList) {
         price = 200;
      }
      break;
-
+     
      case batteryReplacement:
      delay(60000);
      batteryHealth = 100;
@@ -166,65 +165,25 @@ void standardDisplay(){
     if(currentMillis - previousMillis >= 10000){
         if(currentMillis - previousMillis <= 1000){
             display.clear();
-            display.print((reinterpret_cast<const __FlashStringHelper *>(
-# 168 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino" 3
-                         (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 168 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
-                         "BL: % "
-# 168 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino" 3
-                         ); &__c[0];}))
-# 168 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
-                         )));
+            display.print(F("BL: % "));
             display.gotoXY(5, 0);
             display.print(batteryLevel);
             display.gotoXY(0, 1);
-            display.print((reinterpret_cast<const __FlashStringHelper *>(
-# 172 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino" 3
-                         (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 172 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
-                         "BH: % "
-# 172 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino" 3
-                         ); &__c[0];}))
-# 172 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
-                         )));
+            display.print(F("BH: % "));
             display.gotoXY(5, 1);
             display.print(batteryHealth);
         } else if (currentMillis - previousMillis <= 2000){
             display.clear();
-            display.print((reinterpret_cast<const __FlashStringHelper *>(
-# 177 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino" 3
-                         (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 177 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
-                         "CC: "
-# 177 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino" 3
-                         ); &__c[0];}))
-# 177 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
-                         )));
+            display.print(F("CC: "));
             display.gotoXY(5, 0);
             display.print(chargingCycles);
             display.gotoXY(0, 1);
-            display.print((reinterpret_cast<const __FlashStringHelper *>(
-# 181 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino" 3
-                         (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 181 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
-                         "BB: kr "
-# 181 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino" 3
-                         ); &__c[0];}))
-# 181 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
-                         )));
+            display.print(F("BB: kr "));
             display.gotoXY(5, 1);
             display.print(bankBalance);
         } else {
             display.clear();
-            display.print((reinterpret_cast<const __FlashStringHelper *>(
-# 186 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino" 3
-                         (__extension__({static const char __c[] __attribute__((__progmem__)) = (
-# 186 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
-                         "SP: m/s "
-# 186 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino" 3
-                         ); &__c[0];}))
-# 186 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
-                         )));
+            display.print(F("SP: m/s "));
             display.gotoXY(5, 0);
             display.print(averageSpeed);
             display.gotoXY(0, 1);

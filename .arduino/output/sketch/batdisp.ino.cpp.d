@@ -1,5 +1,5 @@
-C:\Users\Maria\Downloads\IELS\.arduino\output\sketch\slay.ino.cpp.o: \
- C:\Users\Maria\Downloads\IELS\.arduino\output\sketch\slay.ino.cpp \
+C:\Users\Maria\Downloads\IELS\.arduino\output\sketch\batdisp.ino.cpp.o: \
+ C:\Users\Maria\Downloads\IELS\.arduino\output\sketch\batdisp.ino.cpp \
  C:\Users\Maria\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/Arduino.h \
  C:\Users\Maria\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/binary.h \
  C:\Users\Maria\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/WCharacter.h \

@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#line 1 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+#line 1 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
 int bankBalance = 1000;
 priceList [5] = {fullCharge, upToCharge, chargeUntilStop, chargeUntilTime, batteryService, BatteryReplacement};
 
@@ -15,19 +15,19 @@ int secondsOverPercentage = 0;
 int chargingCycles = 0;
 
 
-#line 16 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+#line 16 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
 void setup();
-#line 20 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+#line 20 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
 int buttonChargePercent();
-#line 40 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+#line 40 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
 int buttonChargeTime();
-#line 124 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+#line 124 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
 void speedometer();
-#line 155 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+#line 155 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
 void bank();
-#line 161 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+#line 161 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
 void standardDisplay();
-#line 16 "C:\\Users\\Maria\\Downloads\\IELS\\slay\\slay.ino"
+#line 16 "C:\\Users\\Maria\\Downloads\\IELS\\batdisp\\batdisp.ino"
 void setup(){
 
 }
@@ -240,3 +240,8 @@ void loop(){
 
 
 // teams + powerpoint, ta opp video
+// husk å kildehenvise bilder
+// må få c for å bestå :P
+// harvard stil til kilder er standard? eller apa7
+//kildekompasset ;)
+
