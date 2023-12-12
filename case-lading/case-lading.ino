@@ -35,6 +35,7 @@ int buttonCountB = 0;
 
 
 long buttonHoldTime(){
+    //måler hvor lenge knapp A holdes nede
 
   if(buttonA.isPressed()){
 
@@ -49,6 +50,7 @@ long buttonHoldTime(){
 }
 
 int buttonTimeCharge(long holdTime){
+    //finner hvor lenge bilen skal lades utifra hvor lenge A ble holdt
 
   if (holdTime >= interval1) {
 
@@ -72,6 +74,7 @@ int buttonTimeCharge(long holdTime){
 }
 
 int buttonChargePercent(int holdTime){
+    //finner hvor mye prosent skal lades utifra hvor lenge A ble holdt
 
   if (holdTime >= interval1) {
 
@@ -92,9 +95,9 @@ int buttonChargePercent(int holdTime){
 }
 
 void payment(){
-
+//trekker pris fra bankkonto
     bankBalance = bankBalance - price;
-
+//går ut av switch caset i tilfelle det er mindre enn 0 på konto
     if(bankBalance < 0){
 
         break;
@@ -122,7 +125,10 @@ switch (priceList) {
 
     case upToCharge:
     //lader bilen opp til 30%, 50% eller 70% etter knappetrykk
-    buttonChargePercent();
+    Serial.print("to charge your device 30% hold A for 5 seconds");
+    Serial.print("to charge your device 50% hold A for approximately 2 seconds");
+    Serial.print("to charge your device 70% press A once");
+    buttonChargePercent(holdTime);
     price = 0;
 
     while(batteryPercentage < chargePercent && bankBlance > price){
@@ -154,7 +160,10 @@ switch (priceList) {
 
     case chargeUntilTime:
     //lader bilen i 2.5 min, 5 min eller 7.5 min etter knappetrykk
-    buttonTimeCharge();
+    Serial.print("to charge your device for 2.5 min hold A for 5 seconds");
+    Serial.print("to charge your device for 5 min hold A for approximately 2 seconds");
+    Serial.print("to charge your device for 7.5 min press A once");
+    buttonTimeCharge(holdTime);
     unsigned long startCharging = millis();
 
     while(batteryPercentage < 100 && startCharging < chargeTime && bankBalance >= price){
@@ -174,7 +183,7 @@ switch (priceList) {
         batteryHealth = batteryHealth + 1;
         delay(2000);
     }
-    
+
     price = 200;
     payment();
     break;
@@ -189,6 +198,7 @@ switch (priceList) {
     break;
 
     default:
+    //melding ved feil inntasting
     Serial.print("Invalid command. Choose between fullCharge, upToCharge, chargeUntilStop, chargeUntilTime, batteryService, or batteryReplacement.");
 
 }
