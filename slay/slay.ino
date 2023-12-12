@@ -37,6 +37,13 @@ int buttonChargePercent(){
      return holdTime, buttonCount; 
 }
 
+ switch case priceList
+
+ if (Serial.available() > 0) {
+    char priceList = Serial.read();
+    
+    switch (priceList) {
+
 int buttonChargeTime(){
      if(buttonState) {
          startPress = millis();

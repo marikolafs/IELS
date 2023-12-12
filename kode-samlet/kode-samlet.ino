@@ -3,9 +3,6 @@
 #include "PololuOLEDHelpers.h"
 #include <LSM6.h>
 
-//speedometer 
-//bergen hastighet og distanse
-
 //distanse
 Zumo32U4Encoders encoders;
 Zumo32U4LineSensors lineSensors;
@@ -17,9 +14,6 @@ LSM6 imu;
 int firekantEncoderTicks;
 int encoderValue = 0;
 int previousEncoderValue = 0;
-
-float distance = 0.0;
-float totalDistance = 0.0;
 
 const float pi = 3.14159;
 const float diameter = 0.039; // 39mm = 0.039 m 3.9 cm
@@ -45,15 +39,14 @@ unsigned long previousBatteryTime = 0;
 
 // variables concerning distance calculation
 float distance = 0.0;
+float totalDistance = 0.0;
 
 const float pi = 3.14159;
 const float diameter = 0.039; // 39mm = 0.039 m 3.9 cm
 const float omkrets = pi * diameter;
 
-
 //counts per revolution
 const float counts_per_revolution = 75.81 * 12; // hjulene roterer 1 gang per 75.81 motorrotasjon. Encoder teller 12 ganger per motorrotasjon
-
 
 // counts
 int countsLeft;
@@ -70,12 +63,11 @@ int battery_level = 100;
 float currentPlace;
 int batteryPrecentage = 100;
 int prevBatteryPercentage = 100;
-
+float chargedbatterym = 0.0; 
 
 float antallCm; // gir oss antall cm
 float totalCm;
 float totalM;
-
 
 // det er ca 5390 ticks på 65 cm 
 // bilen kan kjøre 65 cm per sekund
@@ -90,10 +82,6 @@ antall cm = counts / 82
 totalcm = totalcm + antall cm
 total m = total cm / 100 
 */
-
-int batteryPercentage = 100;
-float chargedbatterym = 0.0;
-
 
 // bank variabler
 int bankBalance = 1000;
@@ -188,7 +176,9 @@ void setup() {
   calibrateSensors();
   // put your setup code here, to run once:
 
+  Serial.begin(9600);
 }
+
 
 float calculateDistance() {
   encoderTicks = (encoders.getCountsAndResetLeft() + encoders.getCountsAndResetRight()) / 2;
@@ -219,8 +209,6 @@ void firekant(float totalDistance) {
     }
   }
 }
-
-
 
 
 
@@ -298,7 +286,7 @@ void loop() {
   //display.gotoXY(0,1);
   //display.print(batteryPercentage);
 
-
+  
 
   /*
   display.clear();
@@ -314,4 +302,4 @@ void loop() {
   //display.print(velocity);
   display.print(velocity_2);
   */
- }
+}
