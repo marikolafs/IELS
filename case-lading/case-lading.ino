@@ -35,48 +35,68 @@ int buttonCountB = 0;
 
 
 long buttonHoldTime(){
+
   if(buttonA.isPressed()){
+
     startPress = millis();
-  }
-  else {
+  } else {
+
     endPress = millis();
     holdTime = endPress - startPress;
   }
+
   return holdTime;
 }
 
 int buttonTimeCharge(long holdTime){
+
   if (holdTime >= interval1) {
+
     chargeTime = 450000;
     price = 75;
   }
+
   if(holdTime > interval3 && holdTime < interval1) {
+
     chargeTime = 300000;
     price = 50;
   }
+
   if (holdTime <= interval3 && holdTime > 0) {
+
     chargeTime = 150000;
     price = 25;
   }
+
   return chargeTime, price;
 }
 
 int buttonChargePercent(int holdTime){
+
   if (holdTime >= interval1) {
+
     chargePercent = 30; 
   }
+
   if(holdTime > interval3 && holdTime < interval1 ) {
+
     chargePercent = 50;
   }
+
   if(holdTime <= interval3 && holdTime > 0) {
+
     chargePercent = 70;
   } 
+
   return chargePercent;
 }
 
 void payment(){
+
     bankBalance = bankBalance - price;
+
     if(bankBalance < 0){
+
         break;
     }
 }
@@ -86,12 +106,16 @@ switch (priceList) {
     case fullCharge:
     //lader bilen til 100%
     price = 100;
+
     if(bankBalance >=100) {
+
         while(batteryPercentage < 100) {
+
             batteryPercentage = batteryPercentage + 1;
             delay(5000);
         }
     }
+
     chargingCycles = chargingCycles + 1; 
     payment();
     break;
@@ -100,11 +124,14 @@ switch (priceList) {
     //lader bilen opp til 30%, 50% eller 70% etter knappetrykk
     buttonChargePercent();
     price = 0;
+
     while(batteryPercentage < chargePercent && bankBlance > price){
+
         price = price + 2;
         batteryPercentage = batteryPercentage +1;
         delay(5000),
     }
+
     chargingCycles = chargingCycles + 1;
     payment();
     break;
@@ -112,11 +139,14 @@ switch (priceList) {
     case chargeUntilStop:
     //lader bilen kontinuerlig så lenge knapp holdes nede
     previousBatterPercentage = batterPercentage;
+
     while(buttonState == HIGH && bankBalance > price){
+
         batteryPercentage = batteryPercentage + 1;
         price = price + 1;
         delay(5000);
     }
+
     price = batteryPercentage - previousBatteryPercentage;
     chargingCycles = chargingCycles + 1;
     payment();
@@ -126,10 +156,13 @@ switch (priceList) {
     //lader bilen i 2.5 min, 5 min eller 7.5 min etter knappetrykk
     buttonTimeCharge();
     unsigned long startCharging = millis();
+
     while(batteryPercentage < 100 && startCharging < chargeTime && bankBalance >= price){
+
         batteryPercentage = batteryPercentage + 1;
         delay(5000);
     }
+
     chargingCycles = chargingCycles + 1; 
     payment();
     break;
@@ -137,9 +170,11 @@ switch (priceList) {
     case batteryService:
     //setter batteryHealth opp til 80%
     while(batteryHealth < 80){
+
         batteryHealth = batteryHealth + 1;
         delay(2000);
     }
+    
     price = 200;
     payment();
     break;
@@ -172,7 +207,7 @@ void loop(){
     if (Serial.available() > 0) {
       char priceList = Serial.read();
       switch(priceList);
+      Serial.print("Thank you!");
   }
 
-    
 }
