@@ -64,28 +64,33 @@ int buttonChargeTime(){
 switch (priceList) {
     case fullCharge:
      price = 100;
-     while (batteryLevel < 100) {
+     if(bankBalance >= 100){
+        while (batteryLevel < 100 ) {
         batteryLevel = batterLevel + 1;
         delay(5000);
       }
+     }
       chargingCycles = chargingCycles + 1;
+      bankBalance = bankBalance - price;
       break;
 
     case upToCharge: 
      buttonChargePercent();
      price = 0;
-     while(batteryLevel < charge) {
+     while(batteryLevel < charge && bankBalance > price) {
         price = price + 2;
         batteryLevel = batteryLevel + 1;
         delay(5000);
      }
      chargingCycles = chargingCycles + 1;
+     bankBalance = bankBalance - price;
      break;
 
      case chargeUntilStop:
      previousBatteryLevel = batteryLevel;
-     while(buttonState == HIGH) {
+     while(buttonState == HIGH && bankBalance > 0) {
         batteryLevel = batteryLevel + 1;
+        bankBalance = bankBalance - 1;
         delay(5000);
      }
      price = batteryLevel - previousBatteryLevel;
@@ -95,28 +100,30 @@ switch (priceList) {
      case chargeUntilTime:
      buttonChargeTime();
      unsigned long startCharging = millis();
-     while(batteryLevel < 100) {
+     while(batteryLevel < 100 && bankBalance > 0) {
         while(startCharging < chargeTime) {
             batteryLevel = batteryLevel + 1;
             delay(5000);
-
         }
      }
      chargingCycles = chargingCycles + 1;
+     bankBalance = bankBalance - price;
      break;
 
      case batteryService:
      while(batteryHealth < 80) {
         batteryHealth = batteryHealth + 1;
         delay(2000);
-        price = 200;
      }
+     price = 200;
+     bankBalance = bankBalance - price;
      break;
      
      case batteryReplacement:
      delay(60000);
      batteryHealth = 100;
      price = 300;
+     bankBalance = bankBalance - price;
      secondsOverPercentage = 0;
      break;
 }

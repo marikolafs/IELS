@@ -23,11 +23,10 @@
    "-DARDUINO_ARCH_AVR",
    "-IC:\\Users\\Maria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\cores\\arduino",
    "-IC:\\Users\\Maria\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\variants\\standard",
-   "-IC:\\Users\\Maria\\Documents\\Arduino\\libraries\\PololuBuzzer\\src",
-   "C:\\Users\\Maria\\Downloads\\IELS\\.arduino\\output\\sketch\\buzzer.ino.cpp",
+   "C:\\Users\\Maria\\Downloads\\IELS\\.arduino\\output\\sketch\\slay.ino.cpp",
    "-o",
-   "C:\\Users\\Maria\\Downloads\\IELS\\.arduino\\output\\sketch\\buzzer.ino.cpp.o"
+   "C:\\Users\\Maria\\Downloads\\IELS\\.arduino\\output\\sketch\\slay.ino.cpp.o"
   ],
-  "file": "C:\\Users\\Maria\\Downloads\\IELS\\.arduino\\output\\sketch\\buzzer.ino.cpp"
+  "file": "C:\\Users\\Maria\\Downloads\\IELS\\.arduino\\output\\sketch\\slay.ino.cpp"
  }
 ]
