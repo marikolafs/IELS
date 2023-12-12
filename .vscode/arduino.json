@@ -1,7 +1,7 @@
 {
     "board": "arduino:avr:uno",
     "output": ".arduino/output",
-    "sketch": "slay/slay.ino",
+    "sketch": "kode-samlet/kode-samlet.ino",
     "port": "COM3",
     "programmer": "avrisp"
 }

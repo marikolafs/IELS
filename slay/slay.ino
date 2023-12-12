@@ -161,7 +161,7 @@ void speedometer() {
 
 void bank(){
     // opprett bankkonto, tillat +-
-    bankBalance
+    
 
 }
 
