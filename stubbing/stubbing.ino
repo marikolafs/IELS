@@ -82,9 +82,23 @@ float batterycalculation() {
   }
 }
 
-
 void chargeByBacking(){
+    if(batteryPercentage < 90){
+        if(buttonB.isPressed){
+            motors.setSpeeds(0, 0);
+            display.clear();
+            delay(2000);
+            charging();
+        }
+    }
+}
 
+void charging(){
+    motors.setSpeeds(-80, -80);
+    delay(8000);
+    chargedMeter += 10;
+    motors.setSpeeds(-100, 100);
+    delay(1700);
 }
 
 void emergencyChargeByBacking(){
@@ -92,6 +106,10 @@ void emergencyChargeByBacking(){
 }
 
 void displayBattery(){
+
+    display.print("battery: ");
+    display.gotoXY(1, 0);
+    display.print(batteryPercentage);
 
 }
 

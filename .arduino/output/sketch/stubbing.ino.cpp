@@ -41,16 +41,39 @@ void displaySpeedDistance(){
   display.print(totalDistance);
 }
 
-void averageSpeed(){
-
+void SpeedPerMinute(){
+  currentTime = millis();
+  if(currentTime - previousTime > 60000){
+    totalSpeed = 0;
+    for(int i = 0; i < 60; i++){
+      speedReadings[i] = antallCm;
+    }
+     for(int i = 0; i < 60; i++){
+       totalSpeed = totalSpeed + speedreadings[i];
+    }
+  }
+  return totalSpeed;
 }
 
-void maxSpeed(){
-
+float averageSpeedCalculation(totalSpeed){
+    averageSpeed = totalSpeed/60;
+    return averageSpeed;
 }
 
-int secondsOverSpeedLimit(){
+void maxSpeedCalculation(totalSpeed){
+    if(array[i] > array[i -1]){
+        maxSpeed = array[i];
+    }
+    return maxSpeed;
+}
 
+int secondsOverSpeedLimit(antallCm){
+    for(int i = 0; i < 61; i++){
+      if(antallCm >= 280){
+        secondsOverPercentage = secondsOverPercentage + 1;
+      }
+    }
+    return secondsOverPercentage;
 }
 
 float batterycalculation() {
@@ -114,7 +137,6 @@ void lowBatteryMode(){
     } else {
         lowBattery = false;
     }
-
 }
 
 void extraLowBatteryMode(){
@@ -123,6 +145,7 @@ void extraLowBatteryMode(){
         if(currentMillis - previousMillis < 15000){
             buzzer.playFromProgramSpace(lowBatteryBeep);
         }
+        previousMillis = currentMillis;
     }
 
 }
