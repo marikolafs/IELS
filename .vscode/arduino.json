@@ -1,7 +1,7 @@
 {
     "board": "arduino:avr:uno",
     "output": ".arduino/output",
-    "sketch": "stubbing/stubbing.ino",
+    "sketch": "case-lading/case-lading.ino",
     "port": "COM3",
     "programmer": "avrisp"
 }

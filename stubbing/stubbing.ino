@@ -1,7 +1,39 @@
 #include <Wire.h>
 #include <Zumo32U4.h>
 
+Zumo32U4ButtonA buttonA;
+Zumo32U4ButtonB buttonB;
+
+int bankBalance = 1000;
+
+int chargePercent;
+
 bool lowBattery = false;
+unsigned long malfunctionTime;
+bool emergencyCharge = true;
+float antallCm = 0;
+float totalCm;
+
+float encoderTicks;
+float distance;
+float totalDistance;
+
+float totalSpeed;
+
+speedreadings[60];
+
+float averageSpeed;
+float maxSpeed;
+
+int secondsOverPercentage = 0;
+
+int batteryPercentage = 100;
+
+int price = 0;
+
+int chargedMeter;
+
+int batteryHealth = 100;
 
 void setup(){
 
@@ -89,6 +121,7 @@ void chargeByBacking(){
             display.clear();
             delay(2000);
             charging();
+            chargedMeter += 10;
         }
     }
 }
@@ -96,14 +129,27 @@ void chargeByBacking(){
 void charging(){
     motors.setSpeeds(-80, -80);
     delay(8000);
-    chargedMeter += 10;
     motors.setSpeeds(-100, 100);
     delay(1700);
 }
 
 void emergencyChargeByBacking(){
 
+    if(emergencyCharge == true){
+      if(batteryPercentage < 20){
+        if(buttonB.isPressed){
+            motors.setSpeeds(0, 0);
+            display.clear();
+            delay(2000);
+            charging();
+            chargedMeter += 50;
+            emergencyCharge = false;
+        }
+      }
+    }
 }
+
+
 
 void displayBattery(){
 
@@ -113,12 +159,13 @@ void displayBattery(){
 
 }
 
-int batteryHealth(){
-
-}
-
 void randomMalfunction(){
-
+    currentMillis = millis();
+    previousMillis = 0;
+    malfunctionTime = random(600000);
+    if(currentMillis - previousMillis > malfunctionTime){
+      batteryHealth = batteryHealth - 50;
+    }
 }
 
 void payment(){
@@ -168,7 +215,24 @@ void extraLowBatteryMode(){
 
 
 void loop(){
-
+    calculateSpeed();
+    calculateDistance();
+    isplaySpeedDistance();
+    speedPerMinute();
+    averageSpeedCalculation(totalSpeed);
+    maxSpeedCalculation(totalSpeed);
+    secondsOverSpeedLimit(antallCm);
+    batterycalculation();
+    chargeByBacking();
+    charging();
+    emergencyChargeByBacking();
+    displayBattery();
+    randomMalfunction();
+    payment();
+    batteryService();
+    batteryReplacement();
+    lowBatteryMode();
+    extraLowBatteryMode();
 }
 
 
